@@ -1,3 +1,4 @@
+-- sletter eksisterende tabeller
 drop table Teater;
 drop table TeaterSal;
 drop table Teaterstykke;
@@ -12,10 +13,12 @@ drop table Kundegruppe;
 drop table Billettkjop;
 drop table Kunde;
 
+--Oppretter tabeller
 
+--ENTITETSKLASSER--
 
 create table Teater(
-    teaternavn  varchar(40) not null
+    teaternavn  varchar(40) not null,
     constraint teaternavn_pk primary key (teaternavn)
 );
 
