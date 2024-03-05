@@ -126,9 +126,9 @@ create table Forestilling(
 );
 
 create table Kundegruppe(
-    navn varchar(40) not null, -- vurdere å endre dette til å hete kundegruppe? ikke så intuitivt
-    minimumantall integer,
-    constraint kundegruppe_pk primary key (navn)
+    kundegruppe varchar(40) not null, -- vurdere å endre dette til å hete kundegruppe? ikke så intuitivt. (Endret)
+    minimumAntall integer,
+    constraint kundegruppe_pk primary key (kundegruppe)
 );
 
 create table Billett(
@@ -139,7 +139,7 @@ create table Billett(
     salnavn varchar(40),
     teaternavn varchar(40),
     fid integer not null,
-    kjopid integer not null,
+    kjopid integer, -- 
     kundegruppe varchar(40), 
     constraint billett_pk primary key (billettid),
     constraint billett_stol_fk foreign key (stolnr, radnr, omrode, salnavn, teaternavn) references Stol(stolnr, radnr, omrode, salnavn, teaternavn)
@@ -151,7 +151,7 @@ create table Billett(
     constraint billett_forestilling_fk foreign key (fid) references Forestilling(fid)
         on update cascade
         on delete set null,
-    constraint billett_kundegruppe_fk foreign key (kundegruppe) references Kundegruppe(navn)
+    constraint billett_kundegruppe_fk foreign key (kundegruppe) references Kundegruppe(kundegruppe)
         on update cascade
         on delete set null
 );
@@ -173,7 +173,7 @@ create table Kunde(
     mobilnummer integer(8),
     postnr integer(4) not null,
     gatenavn varchar(40),
-    gatenummer varchar(10), -- må gjøre mulig med bokstaver
+    gatenr varchar(10), -- må gjøre mulig med bokstaver
     constraint kunde_pk primary key (kundeid),
     constraint kunde_fk foreign key (postnr) references Poststeder(postnr)
 		on update cascade
@@ -206,7 +206,7 @@ create table Harkundegruppe (
     stykkeid integer not null,
     pris decimal(10, 2) not null,
     constraint harkundegruppe_pk primary key (kundegruppe, stykkeid),
-    constraint har_kundegruppe_fk foreign key (kundegruppe) references Kundegruppe(navn)
+    constraint har_kundegruppe_fk foreign key (kundegruppe) references Kundegruppe(kundegruppe)
         on update cascade
         on delete set null,
     constraint stykke_har_kundegruppe_fk foreign key (stykkeid) references Teaterstykke(stykkeid)
