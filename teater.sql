@@ -1,3 +1,4 @@
+-- sletter eksisterende tabeller
 drop table Teater;
 drop table TeaterSal;
 drop table Teaterstykke;
@@ -18,7 +19,9 @@ drop table Rolle;
 drop table Skuespillerirolle;
 drop table Utforesav;
 
+--Oppretter tabeller
 
+--ENTITETSKLASSER--
 
 create table Teater(
     teaternavn  varchar(40) not null,
