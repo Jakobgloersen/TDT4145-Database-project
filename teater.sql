@@ -25,9 +25,9 @@ drop table Utforesav;
 
 create table Teater(
     teaternavn  varchar(40) not null,
-    pid integer not null,
+    direktorpid integer unique, --unique for å håndtere at det ikke kan være samme direktører for forskjellige teater. 
     constraint teaternavn_pk primary key (teaternavn)
-    constraint teater_fk foreign key (pid) references Ansatt(pid)
+    constraint teater_fk foreign key (direktorpid) references Ansatt(pid)
         on update cascade
         on delete set null
 );
@@ -44,8 +44,8 @@ CREATE TABLE Teatersal(
 create table Teaterstykke(
     stykkeid  integer not null,
     tittel  varchar(40),
-    teaternavn varchar(40) not null,
-    salnavn varchar(40) not null,
+    teaternavn varchar(40),
+    salnavn varchar(40),
     constraint teaterstykke_pk primary key (stykkeid),
     constraint teatersal_fk foreign key (teaternavn, salnavn) references Teatersal(teaternavn, salnavn)
         on update cascade
