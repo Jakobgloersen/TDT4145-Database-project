@@ -1,23 +1,23 @@
 -- sletter eksisterende tabeller
-drop table Teater;
-drop table TeaterSal;
-drop table Teaterstykke;
-drop table Akt;
-drop table Person;
-drop table Ansatt;
-drop table Skuespiller;
-drop table Oppgave;
-drop table Stol;
-drop table Forestilling;
-drop table Kundegruppe;
-drop table Billettkjop;
-drop table Kunde;
-drop table Billett;
-drop table Harkundegruppe;
-drop table Poststeder;
-drop table Rolle;
-drop table SpillerRolle;
-drop table Utforesav;
+drop table if exists Teater;
+drop table if exists TeaterSal;
+drop table if exists Teaterstykke;
+drop table if exists Akt;
+drop table if exists Person;
+drop table if exists Ansatt;
+drop table if exists Skuespiller;
+drop table if exists Oppgave;
+drop table if exists Stol;
+drop table if exists Forestilling;
+drop table if exists Kundegruppe;
+drop table if exists Billettkjop;
+drop table if exists Kunde;
+drop table if exists Billett;
+drop table if exists Harkundegruppe;
+drop table if exists Poststeder;
+drop table if exists Rolle;
+drop table if exists SpillerRolle;
+drop table if exists Utforesav;
 
 --Oppretter tabeller
 
@@ -25,7 +25,7 @@ drop table Utforesav;
 
 create table Teater(
     teaternavn  varchar(40) not null,
-    direktorpid integer unique, --unique for å håndtere at det ikke kan være samme direktører for forskjellige teater. 
+    direktorpid integer unique, 
     constraint teaternavn_pk primary key (teaternavn)
     constraint teater_fk foreign key (direktorpid) references Ansatt(pid)
         on update cascade
@@ -37,7 +37,7 @@ CREATE TABLE Teatersal(
     salnavn varchar(40) not null,
     constraint teaternavn_fk foreign key (teaternavn) references Teater(teaternavn)
         on update cascade
-        on delete cascade, -- kan ikke ha en teatersal uten et teater, derfor cascade. kan være farlig. Vurdere restrict?
+        on delete cascade, 
     constraint teatersal_pk primary key(teaternavn, salnavn)
 );
 
@@ -94,7 +94,7 @@ create table Rolle(
     constraint rolle_pk primary key (stykkeid, aktnr, rollenavn),
     constraint rolle_fk foreign key (stykkeid, aktnr) references Akt(stykkeid, aktnr)
         on update cascade
-        on delete cascade -- sletter roller hvis en akt blir slettet
+        on delete cascade 
 );
 
 create table Oppgave(
@@ -130,7 +130,7 @@ create table Forestilling(
 );
 
 create table Kundegruppe(
-    kundegruppe varchar(40) not null, -- vurdere å endre dette til å hete kundegruppe? ikke så intuitivt. (Endret)
+    kundegruppe varchar(40) not null, 
     minimumAntall integer,
     constraint kundegruppe_pk primary key (kundegruppe)
 );
@@ -177,7 +177,7 @@ create table Kunde(
     mobilnummer integer(8) unique,
     postnr integer(4) not null,
     gatenavn varchar(40),
-    gatenr varchar(10), -- må gjøre mulig med bokstaver
+    gatenr varchar(10), 
     constraint kunde_pk primary key (kundeid),
     constraint kunde_fk foreign key (postnr) references Poststeder(postnr)
 		on update cascade
@@ -206,7 +206,7 @@ create table Utforesav (
 );
 
 create table Harkundegruppe (
-    kundegruppe varchar(40) not null, -- greit at dette bare heter kundegruppe, og ikke har samme navn som i kundegruppe?
+    kundegruppe varchar(40) not null, 
     stykkeid integer not null,
     pris decimal(10, 2) not null,
     constraint harkundegruppe_pk primary key (kundegruppe, stykkeid),
