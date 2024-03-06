@@ -25,7 +25,11 @@ drop table Utforesav;
 
 create table Teater(
     teaternavn  varchar(40) not null,
+    pid integer not null,
     constraint teaternavn_pk primary key (teaternavn)
+    constraint teater_fk foreign key (pid) references Ansatt(pid)
+        on update cascade
+        on delete set null
 );
 
 CREATE TABLE Teatersal(
