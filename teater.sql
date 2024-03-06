@@ -159,7 +159,7 @@ create table Billett(
 create table Billettkjop(
     kjopid integer not null,
     dato DATE,
-    tid TIME, 
+    tidspunkt TIME, 
     kundeid integer not null,
     constraint billettkjop_pk primary key (kjopid),
     constraint kundeid_fk foreign key (kundeid) references Kunde(kundeid)
