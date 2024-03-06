@@ -16,7 +16,7 @@ drop table Billett;
 drop table Harkundegruppe;
 drop table Poststeder;
 drop table Rolle;
-drop table Skuespillerirolle;
+drop table SpillerRolle;
 drop table Utforesav;
 
 --Oppretter tabeller
@@ -214,12 +214,12 @@ create table Harkundegruppe (
         on delete set null
 );
 
-create table Skuespillerirolle(
+create table SpillerRolle(
     pid integer not null,
     stykkeid integer not null,
     aktnr integer not null,
     rollenavn varchar(40) not null,
-    constraint skuespillerirolle_pk primary key (pid, stykkeid, aktnr, rollenavn)
+    constraint spillerRolle_pk primary key (pid, stykkeid, aktnr, rollenavn)
     constraint rolle_fk foreign key (stykkeid, aktnr, rollenavn) references Rolle(stykkeid, aktnr, rollenavn)
         on update cascade
         on delete set null,
