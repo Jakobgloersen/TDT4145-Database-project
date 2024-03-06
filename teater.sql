@@ -37,8 +37,9 @@ drop table if exists SpillerRolle;
 
 drop table if exists Utforesav;
 
---Oppretter tabeller
--- ENTITY CLASSES
+-- oppretter tabeller
+
+-- entitetsklasser
 create table
     Teater (
         teaternavn varchar(40) not null,
@@ -47,7 +48,7 @@ create table
         constraint teater_fk foreign key (direktorpid) references Ansatt (pid) on update cascade on delete set null
     );
 
-CREATE TABLE
+create table
     Teatersal (
         teaternavn varchar(40) not null,
         salnavn varchar(40) not null,
@@ -189,7 +190,7 @@ create table
         constraint poststeder_pk primary key (postnr)
     );
 
--- RELATIONAL CLASSES
+-- relasjonsklasser
 create table
     Utforesav (
         stykkeid integer not null,
