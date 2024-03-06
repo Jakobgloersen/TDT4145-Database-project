@@ -67,7 +67,7 @@ create table Person(
 
 create table Ansatt(
     pid integer not null,
-    epost varchar(40),
+    epost varchar(40) unique,
     ansattstatus varchar(40),
     constraint ansatt_pk primary key (pid),
     constraint ansatt_fk foreign key (pid) references Person(pid)
@@ -170,7 +170,7 @@ create table Billettkjop(
 create table Kunde(
     kundeid integer not null,
     navn varchar(40),
-    mobilnummer integer(8),
+    mobilnummer integer(8) unique,
     postnr integer(4) not null,
     gatenavn varchar(40),
     gatenr varchar(10), -- må gjøre mulig med bokstaver
