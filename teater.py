@@ -125,19 +125,42 @@ def brukerhistorie4(dato):
         sold = cursor.fetchone()[0]
         print(f"Forestilling: '{play[1]}'. Solgte billetter: {sold}")
     print("\n")
+    con.close()
+
+def brukerhistorie5():
+    con = sqlite3.connect("teater.db")
+    cursor = con.cursor()
+    # henter ut stykke, skuespiller og rolle. distinct for å unngå redundans i output som vi ikke er interessert i
+    cursor.execute('''select distinct tittel, navn, rollenavn
+                        from SpillerRolle
+                        join Teaterstykke using(stykkeid)
+                        join Person using(pid)''')
+    res = cursor.fetchall()
+    if not res:
+        print("\n\nFant ingen forestillinger, skuespllere eller roller\n\n")
+        return
+    print("\n\nListe over skuespillere som opptrer i de ulike stykkene med tilhørende rolle:\n")
+    # skriver ut resultatet
+    for i in res:
+        print(f"Forestilling: '{i[0]}'. Skuespiller: {i[1]}. Rolle: {i[2]}")
+    print("\n")
+    cursor.close()
 
 if __name__=="__main__":
     create_db()
     # loop som tillater bruker å velge brukerhistorie de ønsker å gjøre
     while(1):
         print("Brukerhistorie 4 - skriver ut forestilling og antall solgte billetter per forestilling for en gitt dato")
+        print("Brukerhistorie 5 - skriver ut teaterstykkene med tilhørende skuespillere og hvilke roller de spiller i stykket")
         print("Avslutt - skriv 0")
         inp = input("Skriv brukerhistorie du ønsker å utføre: ")
-        if inp == '0':
+        if inp == "0":
             exit()
-        elif inp == '4':
+        elif inp == "4":
             dato = input("Skriv inn dato du ønsker å se forestillinger for på formatet yyyy-mm-dd: ") # input burde valideres
             brukerhistorie4(dato)
+        elif inp == "5":
+            brukerhistorie5()
         else:
             print("\nOppgi brukerhistorien som et tall som representerer en av de gitte brukerhistoriene, for eksempel '4'. For å avslutte, skriv inn '0'.\n")
         
