@@ -52,6 +52,7 @@ create table
     Teatersal (
         teaternavn varchar(40) not null,
         salnavn varchar(40) not null,
+        kapasitet integer,
         constraint teaternavn_fk foreign key (teaternavn) references Teater (teaternavn) on update cascade on delete cascade,
         constraint teatersal_pk primary key (teaternavn, salnavn)
     );
