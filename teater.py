@@ -144,14 +144,37 @@ def brukerhistorie5():
     for i in res:
         print(f"Forestilling: '{i[0]}'. Skuespiller: {i[1]}. Rolle: {i[2]}")
     print("\n")
-    cursor.close()
+    con.close()
+
+def brukerhistorie6():
+    con = sqlite3.connect("teater.db")
+    cursor = con.cursor()
+    # henter ut hvilke foretillinger som har solgt best, sortert synkende
+    cursor.execute(''' select tittel, dato, count(billettid)
+                        from Forestilling
+                        join Teaterstykke using(stykkeid)
+                        left join Billett using(fid)
+                        group by fid
+                        order by count(billettid) desc''')
+    res = cursor.fetchall()
+    if not res:
+        print("\n\nDet er en feil med spørringen\n\n")
+        return
+    # skriver ut resultatet
+    print("\n\nForetillingene som har solgt best:\n")
+    for i in res:
+        print(f"Stykke: {i[0]}. Dato: {i[1]}. Solte billetter: {i[2]}")
+    print("\n")
+    con.close()
 
 if __name__=="__main__":
     create_db()
     # loop som tillater bruker å velge brukerhistorie de ønsker å gjøre
+    print()
     while(1):
         print("Brukerhistorie 4 - skriver ut forestilling og antall solgte billetter per forestilling for en gitt dato")
         print("Brukerhistorie 5 - skriver ut teaterstykkene med tilhørende skuespillere og hvilke roller de spiller i stykket")
+        print("Brukerhistorie 6 - skriver ut forestillingene som har solgt best i synkende rekkefølge")
         print("Avslutt - skriv 0")
         inp = input("Skriv brukerhistorie du ønsker å utføre: ")
         if inp == "0":
@@ -161,6 +184,8 @@ if __name__=="__main__":
             brukerhistorie4(dato)
         elif inp == "5":
             brukerhistorie5()
+        elif inp == "6":
+            brukerhistorie6()
         else:
             print("\nOppgi brukerhistorien som et tall som representerer en av de gitte brukerhistoriene, for eksempel '4'. For å avslutte, skriv inn '0'.\n")
         
