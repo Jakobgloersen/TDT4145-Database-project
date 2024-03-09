@@ -167,6 +167,31 @@ def brukerhistorie6():
     print("\n")
     con.close()
 
+def brukerhistorie7(skuespiller):
+    con = sqlite3.connect("teater.db")
+    cursor = con.cursor()
+    # hente ut hvilke skuespillere den gitte skuespilleren har spilt med i samme akt, og i hvilket stykke
+    cursor.execute('''select distinct t.tittel, s1.navn, s2.navn, sr.aktnr
+                        from SpillerRolle as sr
+                        join Person as s1 using(pid)
+                        join Teaterstykke as t using(stykkeid) 
+                        join (select * 
+                                from SpillerRolle as sr2
+                                join Person as p using(pid)
+                                join Teaterstykke as t2 using(stykkeid)) as s2
+                            on s2.stykkeid = t.stykkeid
+                        where s1.navn = ? and s1.navn != s2.navn and sr.aktnr = s2.aktnr''', (skuespiller,))
+    res = cursor.fetchall()
+    if not res:
+        print(f"\n\nFant ikke skuespillere som spiller med {skuespiller}\n\n")
+        return
+    # skriver ut resultater
+    print(f"\n\nSkuespillere som har spilt i samme akt i samme teaterstykke som {skuespiller}:\n")
+    for i in res:
+        print(f"{i[1]} spiller sammen med {i[2]} i '{i[0]}' i akt nummer {i[3]}.")
+    print("\n")
+    con.close()
+
 if __name__=="__main__":
     create_db()
     # loop som tillater bruker å velge brukerhistorie de ønsker å gjøre
@@ -175,6 +200,7 @@ if __name__=="__main__":
         print("Brukerhistorie 4 - skriver ut forestilling og antall solgte billetter per forestilling for en gitt dato")
         print("Brukerhistorie 5 - skriver ut teaterstykkene med tilhørende skuespillere og hvilke roller de spiller i stykket")
         print("Brukerhistorie 6 - skriver ut forestillingene som har solgt best i synkende rekkefølge")
+        print("Brukerhistorie 7 - skriver ut hvem som har spilt med en gitt skuespiller i forestillingene den gitte skuespilleren deltar i")
         print("Avslutt - skriv 0")
         inp = input("Skriv brukerhistorie du ønsker å utføre: ")
         if inp == "0":
@@ -186,6 +212,9 @@ if __name__=="__main__":
             brukerhistorie5()
         elif inp == "6":
             brukerhistorie6()
+        elif inp == "7":
+            skuespiller = input("Skriv inn skuespilleren du ønsker: ")
+            brukerhistorie7(skuespiller)
         else:
             print("\nOppgi brukerhistorien som et tall som representerer en av de gitte brukerhistoriene, for eksempel '4'. For å avslutte, skriv inn '0'.\n")
         

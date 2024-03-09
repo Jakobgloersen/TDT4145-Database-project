@@ -54,7 +54,7 @@ insert into Person values (2, 'Ingunn Beate Strige Øyen');
 insert into Skuespiller values (2);
 insert into Person values (3, 'Hans Petter Nilsen');
 insert into Skuespiller values (3);
-insert into Person values (4, 'Madleine Brandtzæg Nilsen');
+insert into Person values (4, 'Madeleine Brandtzæg Nilsen');
 insert into Skuespiller values (4);
 insert into Person values (5, 'Synnøve Fossum Eriksen');
 insert into Skuespiller values (5);
