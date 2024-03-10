@@ -107,6 +107,56 @@ def create_db():
     con.commit()
     con.close()
 
+def brukerhistorie3():
+    con = sqlite3.connect("teater.db")
+    cursor = con.cursor()
+    # opprette et kjøp for de ni billettene med default bruker
+    cursor.execute('''insert into Billettkjop values (3, '2024-03-10', '13:00:00', 0)''')
+    # finner fid
+    cursor.execute('''select fid from Forestilling where dato = '2024-02-03' and stykkeid = 1''')
+    fid = cursor.fetchone()[0]
+    # finner rad med ni ledige plasser
+    cursor.execute('''select Stol.radnr, Stol.omrode
+                        from Stol
+                        left join Billett
+                            on Stol.salnavn = Billett.salnavn
+                            and Stol.teaternavn = Billett.teaternavn
+                            and Stol.stolnr = Billett.stolnr
+                            and Stol.radnr = Billett.radnr
+                            and Stol.omrode = Billett.omrode
+                            and Billett.fid = ?
+                        where Stol.teaternavn = 'Trøndelag Teater' and Stol.salnavn = 'Gamle scene'
+                        group by Stol.radnr, Stol.omrode
+                        having (count(*)-count(Billett.billettid)) >= 9''', (fid,))
+    rad = cursor.fetchone()
+    print(rad)
+    if not rad:
+        print("\n\nFant ikke ni billetter på samme rad.\n\n")
+        return
+    # kjøper ni billetter på raden vi fant
+    cursor.execute('''select stolnr
+                        from Stol 
+                        where Stol.omrode = ? and Stol.radnr = ? and not exists(
+                            select stolnr
+                            from Billett
+                            where fid = ?
+                                and Billett.stolnr = Stol.stolnr
+                                and Billett.radnr = Stol.radnr
+                                and Billett.omrode = Stol.omrode)''', (rad[1], rad[0], fid,))
+    billetter = cursor.fetchmany(9)
+    if not billetter:
+        print("\n\nFant ikke ni billetter på samme rad.\n\n")
+        return
+    print("\n\nKjøpte billetter:\n\n")
+    billettid = 1000 # tilfeldig valgt for å ha unik id
+    for billett in billetter:
+        cursor.execute('''insert into Billett values (?, ?, ?, ?, 'Gamle scene', 'Trøndelag Teater', ?, 3, 'Ordinær')''', (billettid, billett[0], rad[0], rad[1], fid,)) # antar ordinære billetter
+        print(f"Billett-id: {billettid}. Stol: {billett[0]} Rad: {rad[0]}. Område: {rad[1]}")
+        billettid += 1
+    con.commit()
+    con.close()
+    print("\n")
+
 def brukerhistorie4(dato):
     con = sqlite3.connect("teater.db")
     cursor = con.cursor()
@@ -193,10 +243,11 @@ def brukerhistorie7(skuespiller):
     con.close()
 
 if __name__=="__main__":
-    create_db()
+    create_db() # brukerhistorie 1 og 2
     # loop som tillater bruker å velge brukerhistorie de ønsker å gjøre
     print()
     while(1):
+        print("Brukerhistorie 3 - kjøper ni billetter på samme rad for 'Størst av alt er kjærligheten' den 3. februar")
         print("Brukerhistorie 4 - skriver ut forestilling og antall solgte billetter per forestilling for en gitt dato")
         print("Brukerhistorie 5 - skriver ut teaterstykkene med tilhørende skuespillere og hvilke roller de spiller i stykket")
         print("Brukerhistorie 6 - skriver ut forestillingene som har solgt best i synkende rekkefølge")
@@ -205,6 +256,8 @@ if __name__=="__main__":
         inp = input("Skriv brukerhistorie du ønsker å utføre: ")
         if inp == "0":
             exit()
+        elif inp == "3":
+            brukerhistorie3()
         elif inp == "4":
             dato = input("Skriv inn dato du ønsker å se forestillinger for på formatet yyyy-mm-dd: ") # input burde valideres
             brukerhistorie4(dato)
