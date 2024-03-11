@@ -287,7 +287,7 @@ def brukerhistorie3():
     # finner den nåværende høyeste billettid og legg til 1 for den første nye billetten
     cursor.execute('''select max(billettid) from Billett''')
     max_billettid = cursor.fetchone()[0]
-    ny_billettid = max_billettid + 1 if max_billettid is not None else 1000 # Starter på 1000 hvis tabellen er tom
+    ny_billettid = max_billettid + 1 if max_billettid is not None else 0 # Starter på 1000 hvis tabellen er tom
     for billett in billetter:
         cursor.execute('''insert into Billett values (?, ?, ?, ?, 'Gamle scene', 'Trøndelag Teater', ?, ?, 'Ordinær')''', (ny_billettid, billett[0], rad[0], rad[1], fid, ny_kjopid)) # antar ordinære billetter
         print(f"Billett-id: {ny_billettid}. Stol: {billett[0]} Rad: {rad[0]}. Område: {rad[1]}")
