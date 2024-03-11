@@ -232,8 +232,8 @@ def brukerhistorie3():
     cursor.execute(""" select max(kjopid) FROM Billettkjop""")
     max_id = cursor.fetchone()[0]
     ny_kjopid = (
-        max_id + 1 if max_id is not None else 1
-    )  # Starter på 1 hvis tabellen er tom
+        max_id + 1 if max_id is not None else 0
+    )  # Starter på 0 hvis tabellen er tom
 
     # opprette et kjøp for de ni billettene med default bruker og bruker ny_kjopid for kjøpet
     cursor.execute(
@@ -261,7 +261,6 @@ def brukerhistorie3():
         (fid,),
     )
     rad = cursor.fetchone()
-    print(rad)
     if not rad:
         print("\n\nFant ikke ni billetter på samme rad.\n\n")
         return
@@ -302,6 +301,9 @@ def brukerhistorie3():
             f"Billett-id: {ny_billettid}. Stol: {billett[0]} Rad: {rad[0]}. Område: {rad[1]}"
         )
         ny_billettid += 1
+    cursor.execute("""select pris from Harkundegruppe where stykkeid = 1 and kundegruppe = 'Ordinær'""")
+    pris = cursor.fetchone()[0]
+    print(f"\nPrisen er totalt {9*pris} kr.")
     con.commit()
     con.close()
     print("\n")
