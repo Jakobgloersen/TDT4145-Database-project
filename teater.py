@@ -119,9 +119,6 @@ def create_db():
     f.close()
 
     # sett inn stoler for Gamle scene, samt registrer tatte stoler i forbindelse med den gitte forestillingen
-    cursor.execute(
-        """insert into Billettkjop values (1, '2024-03-09', '16:00:00', 0)"""
-    )  # billettkjøp for å samle opp seter som er tatt i Hovedscenen
     f = open("gamle-scene.txt", "r")
     # henter ut dato for forestilling. kode hentet fra tips.txt
     dato = f.readline()
