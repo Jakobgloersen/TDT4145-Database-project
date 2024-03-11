@@ -301,7 +301,10 @@ def brukerhistorie3():
             f"Billett-id: {ny_billettid}. Stol: {billett[0]} Rad: {rad[0]}. Område: {rad[1]}"
         )
         ny_billettid += 1
-    cursor.execute("""select pris from Harkundegruppe where stykkeid = 1 and kundegruppe = 'Ordinær'""")
+
+    cursor.execute(
+        """select pris from Harkundegruppe where stykkeid = 1 and kundegruppe = 'Ordinær'"""
+    )
     pris = cursor.fetchone()[0]
     print(f"\nPrisen er totalt {9*pris} kr.")
     con.commit()
@@ -388,7 +391,7 @@ def brukerhistorie7(skuespiller):
     cursor = con.cursor()
     # hente ut hvilke skuespillere den gitte skuespilleren har spilt med i samme akt, og i hvilket stykke
     cursor.execute(
-        """select distinct t.tittel, s1.navn, s2.navn, sr.aktnr
+        """select distinct t.tittel, s1.navn, s2.navn
                         from SpillerRolle as sr
                         join Person as s1 using(pid)
                         join Teaterstykke as t using(stykkeid) 
@@ -409,7 +412,7 @@ def brukerhistorie7(skuespiller):
         f"\n\nSkuespillere som har spilt i samme akt i samme teaterstykke som {skuespiller}:\n"
     )
     for i in res:
-        print(f"{i[1]} spiller sammen med {i[2]} i '{i[0]}' i akt nummer {i[3]}.")
+        print(f"{i[1]} spiller sammen med {i[2]} i '{i[0]}'.")
     print("\n")
     con.close()
 
