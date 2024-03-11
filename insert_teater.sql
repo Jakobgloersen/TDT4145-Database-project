@@ -1,8 +1,8 @@
 -- direktør
 insert into Person
-values (0, 'Direktør');
+values (0, 'Lars Kirksæther'); --Hentet direktør fra Trøndelag teater sine nettsider
 insert into Ansatt
-values (0, 'direktor@gmail.com', 'fulltid');
+values (0, 'lars@gmail.com', 'fulltid');
 -- teater
 insert into Teater
 values ('Trøndelag Teater', 0);
