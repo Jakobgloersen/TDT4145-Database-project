@@ -1,3 +1,4 @@
+import datetime
 import sqlite3
 
 def create_db():
@@ -110,8 +111,19 @@ def create_db():
 def brukerhistorie3():
     con = sqlite3.connect("teater.db")
     cursor = con.cursor()
-    # opprette et kjøp for de ni billettene med default bruker
-    cursor.execute('''insert into Billettkjop values (3, '2024-03-10', '13:00:00', 0)''')
+
+    # Henter nåværende dato og tid
+    naa = datetime.datetime.now()
+    dato = naa.strftime('%Y-%m-%d')
+    tidspunkt = naa.strftime('%H:%M:%S')
+    
+    # finner den nåværende høyeste kjøpid og legge til 1 for det nye kjøpet
+    cursor.execute(''' select max(kjopid) FROM Billettkjop''')
+    max_id = cursor.fetchone()[0]
+    ny_kjopid = max_id + 1 if max_id is not None else 1 #Starter på 1 hvis tabellen er tom
+
+    # opprette et kjøp for de ni billettene med default bruker og bruker ny_kjopid for kjøpet
+    cursor.execute('''insert into Billettkjop values (?, ?, ?, 0)''', (ny_kjopid, dato, tidspunkt))
     # finner fid
     cursor.execute('''select fid from Forestilling where dato = '2024-02-03' and stykkeid = 1''')
     fid = cursor.fetchone()[0]
@@ -148,11 +160,15 @@ def brukerhistorie3():
         print("\n\nFant ikke ni billetter på samme rad.\n\n")
         return
     print("\n\nKjøpte billetter:\n\n")
-    billettid = 1000 # tilfeldig valgt for å ha unik id
+    #billettid = 1000 # tilfeldig valgt for å ha unik id
+    # finner den nåværende høyeste billettid og legg til 1 for den første nye billetten
+    cursor.execute('''select max(billettid) from Billett''')
+    max_billettid = cursor.fetchone()[0]
+    ny_billettid = max_billettid + 1 if max_billettid is not None else 1000 # Starter på 1000 hvis tabellen er tom
     for billett in billetter:
-        cursor.execute('''insert into Billett values (?, ?, ?, ?, 'Gamle scene', 'Trøndelag Teater', ?, 3, 'Ordinær')''', (billettid, billett[0], rad[0], rad[1], fid,)) # antar ordinære billetter
-        print(f"Billett-id: {billettid}. Stol: {billett[0]} Rad: {rad[0]}. Område: {rad[1]}")
-        billettid += 1
+        cursor.execute('''insert into Billett values (?, ?, ?, ?, 'Gamle scene', 'Trøndelag Teater', ?, ?, 'Ordinær')''', (ny_billettid, billett[0], rad[0], rad[1], fid, ny_kjopid)) # antar ordinære billetter
+        print(f"Billett-id: {ny_billettid}. Stol: {billett[0]} Rad: {rad[0]}. Område: {rad[1]}")
+        ny_billettid += 1
     con.commit()
     con.close()
     print("\n")
