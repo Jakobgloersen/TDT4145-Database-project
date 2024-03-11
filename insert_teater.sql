@@ -241,6 +241,8 @@ insert into Rolle
 values (0, 4, 'Peter');
 insert into Rolle
 values (0, 5, 'Peter');
+insert into Rolle
+values (0, 1, 'Baard Bratte'); -- antar at Baard Bratte rollen kun er med i akt 1
 -- SpillerRolle for Kongsemnene
 insert into SpillerRolle
 values (1, 0, 1, 'Håkon Haakonssønn');
@@ -334,6 +336,8 @@ insert into SpillerRolle
 values (12, 0, 4, 'Peter');
 insert into SpillerRolle
 values (12, 0, 5, 'Peter');
+insert into SpillerRolle
+values (10, 0, 1, 'Baard Bratte');
 -- skuespillere for Størst av alt er kjærlighete
 insert into Person
 values (13, 'Sunniva Du Mond Nordal');
