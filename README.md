@@ -307,6 +307,7 @@ Arturo Scotti spiller sammen med Thomas Jensen Takyi i 'Kongsemnene'.
 
 Arturo Scotti spiller sammen med Fabian Heidelberg Lunde i 'Kongsemnene'.
 
+
 **Input:** ```Snorre Ryen Tøndel```
 
 **Output:**
@@ -332,7 +333,7 @@ Snorre Ryen Tøndel spiller sammen med Thomas Jensen Takyi i 'Kongsemnene'.
 
 
 # Antagelser gjort i implementeringen av databaseapplikasjonen
-I Brukerhistorie 1 når de to salene skal settes inn sammen med stoler, teaterstykker, forestillinger, akter, roller, skuespillere og andre medvirkende er det gjort noen antagelser. 
+Det er gjort noen antagelser i Brukerhistorie 1 når de to salene skal settes inn sammen med stoler, teaterstykker, forestillinger, akter, roller, skuespillere og andre medvirkende.
 
 - Det er ikke angitt hvilke akter rollen Baard Bratte spiller i, derfor er det antatt at Baard Bratte rollen kun er spiller i akt 1.
 
