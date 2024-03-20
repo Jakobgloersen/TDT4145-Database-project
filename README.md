@@ -1,4 +1,5 @@
-TDT4145 - prosjekt
+Gruppe 150
+TDT4145 - prosjekt DB2 av Torbjørn Rolstad, Jakob M. Gløersen & Kaja Loennecken
 
 # Oppskrift på kjøring av program
 
