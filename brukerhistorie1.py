@@ -13,6 +13,7 @@ with open("insert_teater.sql", "r") as insert_sql:
     insert_script = insert_sql.read()
 cursor.executescript(insert_script)
 
+# leser inn postnummer fra txt-fil og setter inn i Poststedertabellen
 with open("postnummer.txt", "r", encoding="utf-16") as f:
     postnummer = f.readlines()
 for linje in postnummer:
