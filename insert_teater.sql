@@ -315,7 +315,7 @@ values (6, 0, 5, 'Sigrid');
 insert into SpillerRolle
 values (6, 0, 4, 'Ingeborg');
 insert into SpillerRolle
-values (12, 0, 1, 'Guttorm Ingesson');
+values (1, 0, 1, 'Guttorm Ingesson'); -- antar at Guttorm Ingesson spilles av Arturo Scotti
 insert into SpillerRolle
 values (2, 0, 1, 'Inga frå Vartejg');
 insert into SpillerRolle
@@ -338,7 +338,7 @@ insert into SpillerRolle
 values (12, 0, 5, 'Peter');
 insert into SpillerRolle
 values (10, 0, 1, 'Baard Bratte');
--- skuespillere for Størst av alt er kjærlighete
+-- skuespillere for Størst av alt er kjærligheten
 insert into Person
 values (13, 'Sunniva Du Mond Nordal');
 insert into Skuespiller

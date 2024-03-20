@@ -146,7 +146,7 @@ Begge de to alternativene forutsetter at de fire første stegene over er gjennom
     ```
     Du vil da få spørmsål om hvilken skuespiller du ønsker. 
     
-    Eksempeldata til input er ```Arturo Scotti``` eller ```Madeleine Brandtzæg Nilsen```
+    Eksempeldata til input er ```Arturo Scotti``` eller ```Snorre Ryen Tøndel```
 
 
 # Tekstlige resultater 
@@ -306,4 +306,36 @@ Arturo Scotti spiller sammen med Madeleine Brandtzæg Nilsen i 'Kongsemnene'.
 Arturo Scotti spiller sammen med Thomas Jensen Takyi i 'Kongsemnene'.
 
 Arturo Scotti spiller sammen med Fabian Heidelberg Lunde i 'Kongsemnene'.
+
+**Input:** ```Snorre Ryen Tøndel```
+
+**Output:**
+Snorre Ryen Tøndel spiller sammen med Arturo Scotti i 'Kongsemnene'.
+
+Snorre Ryen Tøndel spiller sammen med Emil Olafsson i 'Kongsemnene'.
+
+Snorre Ryen Tøndel spiller sammen med Hans Petter Nilsen i 'Kongsemnene'.
+
+Snorre Ryen Tøndel spiller sammen med Isak Holmen Sørensen i 'Kongsemnene'.
+
+Snorre Ryen Tøndel spiller sammen med Per Bogstad Gulliksen i 'Kongsemnene'.
+
+Snorre Ryen Tøndel spiller sammen med Synnøve Fossum Eriksen i 'Kongsemnene'.
+
+Snorre Ryen Tøndel spiller sammen med Emma Caroline Deichmann i 'Kongsemnene'.
+
+Snorre Ryen Tøndel spiller sammen med Ingunn Beate Strige Øyen i 'Kongsemnene'.
+
+Snorre Ryen Tøndel spiller sammen med Madeleine Brandtzæg Nilsen i 'Kongsemnene'.
+
+Snorre Ryen Tøndel spiller sammen med Thomas Jensen Takyi i 'Kongsemnene'.
+
+
+# Antagelser gjort i implementeringen av databaseapplikasjonen
+I Brukerhistorie 1 når de to salene skal settes inn sammen med stoler, teaterstykker, forestillinger, akter, roller, skuespillere og andre medvirkende er det gjort noen antagelser. 
+
+- Det er ikke angitt hvilke akter rollen Baard Bratte spiller i, derfor er det antatt at Baard Bratte rollen kun er spiller i akt 1.
+
+- Det er heller ikke angitt hvem som spiller rollen Gregorius Jonsson. Derfor er det antatt at denne rollen spilles av Arturo Scotti. 
+
 
