@@ -1,5 +1,4 @@
-import subprocess
-import sqlite3
+import os
 
 if __name__ == "__main__":
     print()
@@ -24,32 +23,17 @@ if __name__ == "__main__":
         if inp == "0":
             exit()
         elif inp == "3":
-            subprocess.run(["python", "brukerhistorie3.py"])
+            #subprocess.run(["python", "brukerhistorie3.py"])
+            os.system('python3 brukerhistorie3.py')
         elif inp == "4":
-            subprocess.run(["python", "brukerhistorie4.py"])
+            os.system('python3 brukerhistorie4.py')
         elif inp == "5":
-            with open("brukerhistorie5.sql", "r") as create_sql:
-                create_script = create_sql.read()
-                con = sqlite3.connect("teater.db")
-                cursor = con.cursor()
-                cursor.execute(create_script)
-                result = cursor.fetchall()
-                for row in result:
-                    print(*row, sep=' | ')
-                con.commit()
+            os.system('sqlite3 teater.db < brukerhistorie5.sql')
         
         elif inp == "6":
-            with open("brukerhistorie6.sql", "r") as create_sql:
-                create_script = create_sql.read()
-                con = sqlite3.connect("teater.db")
-                cursor = con.cursor()
-                cursor.execute(create_script)
-                result = cursor.fetchall()
-                for row in result:
-                    print(*row, sep=' | ')
-                con.commit()
+            os.system('sqlite3 teater.db < brukerhistorie6.sql')
         elif inp == "7":
-            subprocess.run(["python", "brukerhistorie7.py"])
+            os.system('python3 brukerhistorie7.py')
         else:
             print(
                 "\nOppgi brukerhistorien som et tall som representerer en av de gitte brukerhistoriene, for eksempel '4'. For å avslutte, skriv inn '0'.\n"

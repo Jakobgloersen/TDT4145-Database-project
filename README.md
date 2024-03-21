@@ -339,4 +339,10 @@ Det er gjort noen antagelser i Brukerhistorie 1 når de to salene skal settes in
 
 - Det er heller ikke angitt hvem som spiller rollen Gregorius Jonsson. Derfor er det antatt at denne rollen spilles av Arturo Scotti. 
 
+- Antatt at brukeren som kjører programmet har sqlite3 og python3 installert. 
+
+- Antatt at alle ansatte er fulltidsansatte
+
+- Har satt epost-adresse til alle ansatte til å være fornavn@gmail.com
+
 
