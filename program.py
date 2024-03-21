@@ -23,7 +23,6 @@ if __name__ == "__main__":
         if inp == "0":
             exit()
         elif inp == "3":
-            #subprocess.run(["python", "brukerhistorie3.py"])
             os.system('python3 brukerhistorie3.py')
         elif inp == "4":
             os.system('python3 brukerhistorie4.py')
