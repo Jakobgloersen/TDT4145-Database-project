@@ -37,7 +37,7 @@ Alternativ 1 er kjøre et program ved bruk av program.py som gir deg muligheten 
 
 Alternativ 2 er å benytte terminalen for kjøring av hver enkelt brukerhistorie separat i terminalen. 
 
-Begge de to alternativene forutsetter at de fire første stegene over er gjennomført. 
+Begge de to alternativene forutsetter at de tre første stegene over er gjennomført. 
 
 ## Alternativ 1
 
