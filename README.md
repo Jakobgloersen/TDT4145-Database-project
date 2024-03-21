@@ -1,11 +1,19 @@
 Gruppe 150
 TDT4145 - prosjekt DB2 av Torbjørn Rolstad, Jakob M. Gløersen & Kaja Loennecken
 
+# DB-2 Innlevering del 2: Realisert databasesystem
+**Av Torbjørn Rolstad, Jakob M. Gløersen & Kaja Loennecken**
+
+## Innhold
+- Oppskrift på kjøring av program
+- Tekstlige resultater
+- Antagelser gjort i implementeringen av databaseapplikasjonen
+
 # Oppskrift på kjøring av program
 
-Under er det en detaljert beskrivelse av hvordan databaseapplikasjonen vi har iplementert kan kjøres. 
+Under er det en detaljert beskrivelse av hvordan databaseapplikasjonen vi har implementert kan kjøres. 
 
-Det er allerede opprettet en tom database-fil som er kalt teater.db. 
+Det er allerede opprettet en tom database-fil som er kalt teater.db. Denne filen ligger i zip-filen sammen med filer som inkluderer python-kildekode med SQL og SQL-script. 
 
 Videre må følgende steg følges: 
 
@@ -44,7 +52,7 @@ Begge de to alternativene forutsetter at de fire første stegene over er gjennom
     Eksempeldata til input er: ```2024-02-03``` eller ```2024-02-12```
 4. Ved inntasting av 7 vil brukerhistorie 7 spørre om hvilken skuespiller du ønsker .
 
-    Eksempeldata til input er ```Arturo Scotti``` eller ```Madeleine Brandtzæg Nilsen```
+    Eksempeldata til input er ```Arturo Scotti``` eller ```Snorre Ryen Tøndel```
 
 5. De resterende brukerhistoriene vil ikke kreve noen input, og vil printe resultatet til terminalen. 
 
